@@ -1,5 +1,6 @@
 package com.myjar.jarassignment.ui.composables
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -32,13 +33,15 @@ fun AppNavigation(
     viewModel: JarViewModel,
 ) {
     val navController = rememberNavController()
-    val navigate = remember { mutableStateOf<String>("") }
+    val navigate = remember { mutableStateOf("") }
 
     NavHost(modifier = modifier, navController = navController, startDestination = "item_list") {
         composable("item_list") {
             ItemListScreen(
                 viewModel = viewModel,
-                onNavigateToDetail = { selectedItem -> navigate.value = selectedItem },
+                onNavigateToDetail = { selectedItem ->
+                    navController.navigate("item_detail/$selectedItem")
+                },
                 navigate = navigate,
                 navController = navController
             )
@@ -85,10 +88,27 @@ fun ItemCard(item: ComputerItem, onClick: () -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
+            .background(Color.White)
             .padding(8.dp)
             .clickable { onClick() }
     ) {
-        Text(text = item.name, fontWeight = FontWeight.Bold, color = Color.Transparent)
+        Text(text = item.name, fontWeight = FontWeight.Bold, color = Color.Black)
+
+        item.data?.color?.let {
+            Text(
+                text = it,
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+        }
+        item.data?.price?.let {
+            Text(
+                text = it.toString(),
+                fontWeight = FontWeight.Bold,
+                color = Color.Black
+            )
+        }
+
     }
 }
 
