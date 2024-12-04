@@ -12,6 +12,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import com.myjar.jarassignment.ui.vm.JarViewModel
 import com.myjar.jarassignment.ui.composables.AppNavigation
+import com.myjar.jarassignment.ui.composables.ItemListScreen
 import com.myjar.jarassignment.ui.theme.JarAssignmentTheme
 
 class MainActivity : ComponentActivity() {
@@ -27,6 +28,7 @@ class MainActivity : ComponentActivity() {
             }
             JarAssignmentTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+
                     AppNavigation(
                         modifier = Modifier.padding(innerPadding),
                         viewModel = viewModel,
